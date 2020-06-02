@@ -8,23 +8,59 @@
 
 # Goals:
 # 1) Examine the R studio environment
+#   a. The Console
+#   b. The Terminal
+#   c. The Script window
+#   d. The Global Environment
+#   e. History
+#   
 # 2) Install some packages
 # 3) Obtain data from a file or a web source
 # 4) Examine the data
 # 5) Plot data
-# 
-# 
+
+
 
 
 # First look at the environment
+# - The Console
+# -- Try something there
+
+print("Hello World")
+
+1+1
+
+d<- 4
+
+print(d)
+
+d
+
+d=4
+
+d
+
 # - Browse the files explorer
 # - See what is under "More"
+# -- Try these:
+
+getwd()
+list.files()
+
+setwd("C:/Users")
+getwd()
+list.files()
+
+setwd("C:/Users/pseed/Documents/GitHub/R-Learning")
+
 # - Run this little script and then look at Plots
 
 library(ggplot2)
 data("iris")
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point()
+
+# Now look at the Environment and History tabs again
 
 # - Look at the Packages tab 
 # -- Click on the name of a package. What do you see? Go down another level in a link
