@@ -70,3 +70,19 @@ View(cell_data)
 # What about data in a table on a link?
 
 web_data<-read.csv("https://data.mendeley.com/datasets/ngzmj4zkms/1/files/fb7927df-a1ea-4257-bf2f-33fecc4090e9/Fig1EFGH_subset8.csv?dl=1")
+
+# install the package Beeswarm
+
+install.packages("beeswarm")
+
+library(beeswarm)
+
+# What are the data columns to plot?
+
+colnames(cell_data)
+
+# or 
+
+names(cell_data)
+
+beeswarm(OFT_velocity~ASD_diagnosis, cell_data)
