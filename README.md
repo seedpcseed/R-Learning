@@ -6,8 +6,8 @@ Welcome to the R-Learning repository for the HMI3 Research Group. Here you will 
 
 You will need two things to begin:
 
-1) R 
-2) RStudio
+1) R (https://www.r-project.org/)
+2) RStudio (https://rstudio.com/products/rstudio/download/)
 
 You can install the latest versions on your computer. 
 
