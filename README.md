@@ -1,4 +1,4 @@
-## R-Learning for the HMI3 Research Group
+# R-Learning for the HMI3 Research Group
 
 Welcome to the R-Learning repository for the HMI3 Research Group. Here you will find step by step scripts as we navigate through R.
 
