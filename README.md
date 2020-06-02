@@ -24,3 +24,12 @@ Here we will go very slow and learn about the R Studio environment.
 - Load some data from a file and the web
 - Plot some data
 
+### Lesson 2
+
+- Review Lesson 1 key points
+- Look at Lesson 1 in markdown language
+- Explore data.frames and matricies
+- Talk about factors
+- Subset and filter data
+- Take a first look at functions
+
