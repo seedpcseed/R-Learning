@@ -13,3 +13,14 @@ You can install the latest versions on your computer.
 
 At a later point, we will discuss running code on the Northwestern Quest nodes.
 
+## The Lessons
+
+### Lesson 1
+
+Here we will go very slow and learn about the R Studio environment.
+
+- Tour of the environment
+- Examine the directory and file explorer
+- Load some data from a file and the web
+- Plot some data
+
