@@ -56,7 +56,7 @@ setwd("C:/Users/pseed/Documents/GitHub/R-Learning")
 # - Run this little script and then look at Plots
 
 library(ggplot2)
-data("iris")
+data(iris)
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
   geom_point()+
   theme_classic()
@@ -128,3 +128,21 @@ colnames(cell_data)
 names(cell_data)
 
 beeswarm(OFT_velocity~ASD_diagnosis, cell_data)
+
+# Now try a few things yourself
+# 
+# Can you see how many columns there are in the cell_data table?
+# What do you notice about the column names? (Hint: look at the characters to divide the words)
+# Show yourself the first 8 rows of the cell_data table
+# 
+# try to load the mtcars data (this is built into R; Hint: how did we load the iris data?)
+# How many columns does the mtcars table have? What are the column names?
+# What are the rownames for mtcars?
+# Can you plot the mtcars mpg vs. the wt? (Hint: copy and adapt the script for plotting some of the iris data)
+# Where do you see the plot?
+# Use the history to re-plot the prior iris data by putting the code from history into the console.
+# Put the plotting script from the history into the source.
+# Clear all of your data in the Environment using the broom icon.
+# Now load the cell_data from the web source.  Try loading the data from your local folder
+# 
+# NICE WORK!!!
