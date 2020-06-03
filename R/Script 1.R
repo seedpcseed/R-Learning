@@ -3,8 +3,8 @@
 # Pat Seed
 # 
 # June 1, 2020
-# 
-# 
+
+
 
 # Goals:
 # 1) Examine the R studio environment
@@ -58,7 +58,13 @@ setwd("C:/Users/pseed/Documents/GitHub/R-Learning")
 library(ggplot2)
 data("iris")
 ggplot(iris, aes(Sepal.Length, Sepal.Width))+
-  geom_point()
+  geom_point()+
+  theme_classic()
+
+
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+
+geom_point()+
+theme_classic()
 
 # Now look at the Environment and History tabs again
 
