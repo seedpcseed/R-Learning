@@ -45,7 +45,34 @@ rownames(df)
 # Now let's select just parts of the dataframe.
 # There are many ways in R to do this
 
-# Here is a classic way
+# Here is a classic way if you know the columns and rows you want by numeric positions
+
+
+# Here is a way using the names of columns you want
+
+
+# These ways are OK but there are newer methods that are easier to read
+# and make for a little more throughput
+
+# first you will need a couple packages
+# Rather than getting them individually we can get them as a group 
+# In what is called "tidyverse". This will give more than you need right now
+# But you'll use much of the subpackages in the future!
+
+install.packages("tidyverse")
+
+library(tidyverse)
+
+# Now you have many tools to read and write data, to filter and sort data, 
+# and do something called piping.  Off to put it to work!
+
+# first let's work on some basic pipes
+# pipes take one action/step and send parts to the next step directly
+# Here is an example
+
+df %>% View()
+
+# this is taking our dataframe and sending it to View()
 
 
 
