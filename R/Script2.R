@@ -83,6 +83,26 @@ install.packages("tidyverse")
 
 library(tidyverse)
 
+# this is taking our dataframe and sending it to View()
+# this is a little silly
+
+# Let's try to get just a few columns of data
+
+colnames(df)
+
+# dataframe[rows, columns]
+
+df[ , c('mpg', 'cyl')]
+
+# Here we are indicating columns we want 
+# df[rows,columns]
+
+df[ , c(1,2)]
+
+df[1:5, 1:5]
+
+df[c(1,3,5), c(1,5,9)]
+
 # Now you have many tools to read and write data, to filter and sort data, 
 # and do something called piping.  Off to put it to work!
 
@@ -92,23 +112,11 @@ library(tidyverse)
 
 df %>% View()
 
-# this is taking our dataframe and sending it to View()
-# this is a little silly
-
-# Let's try to get just a few columns of data
-
-colnames(df)
-
-df[, c('mpg', 'cyl')]
-
-# Here we are indicating columns we want 
-# df[rows,columns]
-
-df[, c(1,2)]
 
 #let's try to a more 'modern' approach
 
-df %>% select(cyl, mpg)
+df %>% 
+  select(cyl, mpg)
 
 # what about selecting parts of the table values and range
 # first let's look at one column we do this as df$NAME
@@ -118,6 +126,10 @@ df$mpg # rstudio should help you with a list of columns
 range(df$mpg)
 
 quantile(df$mpg)
+
+df %>%
+  select(mpg, cyl) %>%
+  range()
 
 # so what if we just want the data table 
 # where mpg is greater that the 50%ile
@@ -131,9 +143,13 @@ df2$mpg
 
 df3<- df %>% filter(mpg>19.2 & mpg<22.8)
 
+df3.1<- df %>% filter(mpg>19.2 & cyl>4)
+
 df4<- df %>% filter(mpg<19.2 | mpg>22.8)
 
 # you can use a lot of other comparisons like >= or <=
+
+df5<- df %>% filter(cyl!=4)
 
 # what about sorting a table 
 
@@ -143,20 +159,29 @@ df %>% arrange(desc(mpg))
 
 df %>% arrange(mpg, cyl)
 
+df6<- df %>% arrange(desc(mpg))
+
 # maybe we want to get a summary of some information about df
 
 df %>% 
   group_by(cyl) %>%
   summarise(
-  N=n(),
-  Mean=mean(mpg),
-  Sum=sum(mpg)
+  N.cyl=n(),
+  Mean.mpg=mean(mpg),
+  Sum.mpg=sum(mpg)
   )
 
 var <- "mass" # this is one of the column names for the dataset 'starwars'
 head(starwars) #see?
 
 summarise(starwars, avg = mean(.data[[var]], na.rm = TRUE))
+
+starwars %>% 
+  group_by(hair_color) %>%
+  summarise(
+    N.hc=n(),
+    mean.mass=mean(mass, na.rm = TRUE)
+  )
 
 starwars %>%
   filter(eye_color=="blue")
@@ -166,7 +191,7 @@ starwars %>%
 
 table(starwars$homeworld)
 
-starwars %>%
+hw<- starwars %>%
   group_by(homeworld) %>%
   summarise(
     N=n()
