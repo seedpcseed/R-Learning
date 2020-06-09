@@ -28,8 +28,16 @@ Here we will go very slow and learn about the R Studio environment.
 
 - Review Lesson 1 key points
 - Look at Lesson 1 in markdown language
-- Explore data.frames and matricies
-- Talk about factors
+- Explore data.frames 
 - Subset and filter data
-- Take a first look at functions
+- Examine piping
+- Perform basic data frame summarization
+
+### Lesson 3
+
+- Review Lesson 2 key points
+- Reshape data frames
+- Look at factors
+- Examine functions
+
 
