@@ -1,8 +1,26 @@
-#From data.carpentry
+#Adapted from data.carpentry
 
-source("./r/setup.R")
+# Script Lesson 4
+# Patrick Seed
+# June 16, 2020
 
-surveys_complete <- read_csv(file = "data_raw/portal_data_joined.csv", col_types = cols()) %>% 
+
+# First we're going to obtain some data
+# We'll use another script to get the data that is called
+# from here using 'source'
+# 
+# Why not just put all the code from the source in this script?
+# 1) It is messy.  It will add a lot of additional code to 
+# the top of this script and just be harded to follow the main 
+# scripting that is the focus here
+# 2) It is reusable. By creating scripts with functions and 
+# code we want to use elsewhere, we can just refer to that script
+# rather than copying and pasting it into every place we can it.
+# 
+
+source("./R/setup.R") # Note that this is a relative path for the R script referenced
+
+surveys_complete <- read_csv(file = "Data/portal_data_joined.csv", col_types = cols()) %>% 
   drop_na(weight, hindfoot_length, sex) %>% 
   group_by(species_id) %>% 
   filter(n() >= 50) %>% 
