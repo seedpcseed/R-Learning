@@ -1,6 +1,6 @@
 #From data.carpentry
 
-source("setup.R")
+source("./r/setup.R")
 
 surveys_complete <- read_csv(file = "data_raw/portal_data_joined.csv", col_types = cols()) %>% 
   drop_na(weight, hindfoot_length, sex) %>% 
@@ -35,28 +35,6 @@ surveys_plot <- ggplot(data = surveys_complete,
 surveys_plot + 
     geom_point()
 
-surveys_plot <- ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length))
-
-surveys_plot + 
-    geom_point()
-
-surveys_plot +
-  geom_point()
-
-surveys_plot
-  + geom_point()
-
-install.packages("hexbin")
-
-library("hexbin")
-
-surveys_plot +
-  geom_hex()
-
-
-install.packages("hexbin")
-library("hexbin")
-
 
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
     geom_point()
@@ -78,6 +56,13 @@ ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length, c
 
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
     geom_point(aes(color = plot_type))
+
+
+install.packages("hexbin")
+library("hexbin")
+
+surveys_plot +
+  geom_hex()
 
 
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
@@ -112,13 +97,25 @@ yearly_sex_counts <- surveys_complete %>%
   count(year, genus, sex)
 
 ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+  geom_line()
+
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
   geom_line() +
   facet_wrap(facets =  vars(genus))
+
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(~genus)
 
 ggplot(data = yearly_sex_counts, 
        mapping = aes(x = year, y = n, color = sex)) +
   geom_line() +
   facet_grid(rows = vars(sex), cols =  vars(genus))
+
+ggplot(data = yearly_sex_counts, 
+       mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_grid(sex~genus)
 
 ggplot(data = yearly_sex_counts, 
        mapping = aes(x = year, y = n, color = sex)) +
@@ -182,6 +179,8 @@ ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot() +
     grey_theme
 
+
+
 install.packages("patchwork")
 
 library("patchwork")
@@ -202,6 +201,22 @@ spp_weight_boxplot + spp_count_plot
 
 spp_weight_boxplot / spp_count_plot
 
+install.packages("cowplot")
+library(cowplot)
+
+plot_grid(spp_count_plot, spp_count_plot, nrow=1)
+
+plot_grid(spp_count_plot, spp_count_plot, ncol=1)
+
+plot_grid(spp_count_plot, spp_count_plot, nrow=1, labels = "auto")
+
+plot_grid(spp_count_plot, spp_count_plot, nrow=1, labels = "AUTO")
+
+plot_grid(spp_count_plot, spp_count_plot, nrow=1, labels = c(1,2))
+
+plot_grid(spp_count_plot, spp_count_plot, nrow=1, labels = c("Fred", "George"))
+
+
 my_plot <- ggplot(data = yearly_sex_counts, 
                   mapping = aes(x = year, y = n, color = sex)) +
     geom_line() +
@@ -213,7 +228,15 @@ my_plot <- ggplot(data = yearly_sex_counts,
     theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
                         axis.text.y = element_text(colour = "grey20", size = 12),
           text=element_text(size = 16))
+
 ggsave("fig/yearly_sex_counts.png", my_plot, width = 15, height = 10)
 
+my_plot
+ggsave("fig/yearly_sex_counts.png", width = 15, height = 10)
+
+install.packages("gridExtra")
+library(gridExtra)
+
 combo_plot <- grid.arrange(spp_weight_boxplot, spp_count_plot, ncol = 2, widths = c(4, 6))
+combo_plot
 ggsave("fig/combo_plot_abun_weight.png", combo_plot, width = 10, dpi = 300)
