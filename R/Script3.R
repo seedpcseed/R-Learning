@@ -62,10 +62,13 @@ mtcars.cars %>% melt(id.vars="Cars")
 
 mtcars.cars %>% melt(id.vars="Cars", measure.vars=c("mpg", "gear"))
 
+mtcars.cars %>% select(Cars, mpg, gear) %>% melt(id.vars="Cars")
+
 # and of course we can add more 'shaping' to the frame like sorting  by 
 # car name
 
-mtcars.cars %>% melt(id.vars="Cars", measure.vars=c("mpg", "gear")) %>%
+mtcars.cars %>% 
+  melt(id.vars="Cars", measure.vars=c("mpg", "gear")) %>%
   arrange(Cars)
 
 # why go wide to long?  take a plot example
@@ -113,6 +116,20 @@ mtcars_melt %>%
     facet_wrap(~variable, scales = "free_y") +
     theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
 
+mtcars_melt %>% 
+  filter(variable %in% c("mpg", "gear")) %>%
+  ggplot(aes(variable, value)) +
+  geom_point() +
+  facet_wrap(~Cars, scales = "free_y") +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+mtcars_melt %>% 
+  filter(variable %in% c("mpg", "gear")) %>%
+  ggplot(aes(variable, value)) +
+  geom_point() +
+  facet_wrap(~Cars) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
 # recast the melted data
 
 recast(mtcars_melt, Cars~variable)
@@ -134,14 +151,12 @@ billboard %>%
     values_drop_na = TRUE
   )
 
-
 anscombe %>%
   pivot_longer(everything(),
                names_to = c(".value", "set"),
                names_pattern = "(.)(.)"
   ) %>%
   arrange(set)
-
 
 pnl <- tibble(
   x = 1:4,
