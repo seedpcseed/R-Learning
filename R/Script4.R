@@ -36,8 +36,6 @@ surveys_complete <- read_csv(file = "Data/portal_data_joined.csv", col_types = c
 
 library("tidyverse")
 
-surveys_complete <- read_csv("data/surveys_complete.csv")
-
 ##### ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 
 ggplot(data = surveys_complete)
@@ -47,14 +45,16 @@ ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length))
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
   geom_point()
 
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
+  geom_point(size=3)
+
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
+  geom_point(size=3, color="red")
+
 surveys_plot <- ggplot(data = surveys_complete, 
                        mapping = aes(x = weight, y = hindfoot_length))
 
 surveys_plot + 
-    geom_point()
-
-
-ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
     geom_point()
 
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
@@ -66,15 +66,27 @@ ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) 
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
     geom_point(alpha = 0.1, aes(color = species_id))
 
+surveys_plot+geom_point(alpha=0.1, aes(color=species_id))
+
+surveys_more_plot<- surveys_plot + geom_point(alpha=0.1, aes(color=species_id))
+
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +
     geom_point(alpha = 0.1)
 
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +
     geom_jitter(alpha = 0.1)
 
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length, color = species_id)) +
+  geom_point(alpha = 0.1, jitter=0.1)
+
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
     geom_point(aes(color = plot_type))
 
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_point(aes(color = plot_type))
+
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_jitter(aes(color = plot_type), alpha=0.1)
 
 install.packages("hexbin")
 library("hexbin")
@@ -90,10 +102,13 @@ ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
     geom_boxplot(alpha = 0) +
     geom_jitter(alpha = 0.3, color = "tomato")
 
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_boxplot(alpha = .5) +
+  geom_jitter(alpha = 0.3, color = "tomato")
 
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-  geom_boxplot(alpha = 0) +
-  geom_jitter(alpha = 0.3, color = "tomato")
+  geom_jitter(alpha = 0.3, color = "tomato")+
+  geom_boxplot(alpha = .5) 
 
 yearly_counts <- surveys_complete %>%
   count(year, genus)
@@ -106,6 +121,8 @@ ggplot(data = yearly_counts, mapping = aes(x = year, y = n, group = genus)) +
 
 ggplot(data = yearly_counts, mapping = aes(x = year, y = n, color = genus)) +
     geom_line()
+
+ggplot(yearly_counts, aes(year, n, color=genus))+geom_line()
 
 ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
@@ -145,23 +162,23 @@ ggplot(data = yearly_sex_counts,
   geom_line() +
   facet_grid(cols = vars(genus))
 
-facet_wrap(vars(genus))    # new
-facet_wrap(~ genus)        # old
-
-facet_grid(rows = vars(genus), cols = vars(sex))   # new
-facet_grid(genus ~ sex)                            # old
-
-facet_grid(rows = vars(genus))   # new
-facet_grid(genus ~ .)            # old
-
-facet_grid(cols = vars(genus))   # new
-facet_grid(. ~ genus)            # old
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(~genus, nrow = 1)
 
 ggplot(data = yearly_sex_counts, 
         mapping = aes(x = year, y = n, color = sex)) +
      geom_line() +
-     facet_wrap(vars(genus)) +
+     facet_wrap(~genus) +
      theme_bw()
+
+
+ggplot(data = yearly_sex_counts, 
+       mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(~genus) +
+  theme_classic()
+
 ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
     geom_line() +
     facet_wrap(vars(genus)) +
@@ -178,6 +195,16 @@ ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
         y = "Number of individuals") +
     theme_bw() +
     theme(text=element_text(size = 16))
+
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(vars(genus)) +
+  labs(title = "Observed genera through time",
+       x = "Year of observation",
+       y = "Number of individuals") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=2, angle = 90))
+
 ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
     geom_line() +
     facet_wrap(vars(genus)) +
@@ -196,8 +223,6 @@ grey_theme <- theme(axis.text.x = element_text(colour = "grey20", size = 12, ang
 ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
     geom_boxplot() +
     grey_theme
-
-
 
 install.packages("patchwork")
 
