@@ -35,13 +35,19 @@ Here we will go very slow and learn about the R Studio environment.
 
 ### Lesson 3
 
-- Review Lesson 2 key points
 - Reshape data frames
-- Look at factors
-- Examine functions
+
+### Lesson 4
+
+- Plotting data
+
+### Lesson 5 (to come)
+
+- Examine factors
+- Look at functions
 
 ## Launch it on Binder:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/seedpcseed/R-Learning/master)
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/seedpcseed/R-Learning/master)
 .. image:: https://mybinder.org/badge_logo.svg
  :target: http://beta.mybinder.org/v2/gh/seedpcseed/R-Learning/master?urlpath=rstudio

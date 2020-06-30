@@ -38,6 +38,7 @@ head(mtcars_transposed)
 # car type | factor | measured value
 
 library(tidyverse)
+library(reshape)
 library(reshape2)
 
 ?melt.data.frame
@@ -112,6 +113,64 @@ mtcars_melt %>%
     facet_wrap(~variable, scales = "free_y") +
     theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
 
-# cast the melted data
-# cast(data, formula, function)
+# recast the melted data
 
+recast(mtcars_melt, Cars~variable)
+
+recast(mtcars_melt, Cars~value) # doesn't make sense
+
+recast(mtcars_melt, variable~Cars) #our original data.frame transposed
+
+
+# the tidyr way
+mtcars.cars %>% 
+  tidyr::pivot_longer(cols=mpg:carb, names_to = "Factor", values_to = "Value")
+
+billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+
+
+anscombe %>%
+  pivot_longer(everything(),
+               names_to = c(".value", "set"),
+               names_pattern = "(.)(.)"
+  ) %>%
+  arrange(set)
+
+
+pnl <- tibble(
+  x = 1:4,
+  a = c(1, 1,0, 0),
+  b = c(0, 1, 1, 1),
+  y1 = rnorm(4),
+  y2 = rnorm(4),
+  z1 = rep(3, 4),
+  z2 = rep(-2, 4),
+)
+
+pnl %>%
+  pivot_longer(
+    -c(x, a, b),
+    names_to = c(".value", "time"),
+    names_pattern = "(.)(.)"
+  )
+
+who %>% pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = c("diagnosis", "gender", "age"),
+  names_pattern = "new_?(.*)_(.)(.*)",
+  values_to = "count"
+)
+
+library(dcldata)
+example_eagle_nests %>% 
+  pivot_longer(
+    cols = c(`2007`, `2009`), 
+    names_to = "year", 
+    values_to = "num_nests"
+  )
