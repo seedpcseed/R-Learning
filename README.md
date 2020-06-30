@@ -47,6 +47,4 @@ Here we will go very slow and learn about the R Studio environment.
 - Look at functions
 
 ## Launch it on Binder:
-
 [![Binder](https://mybinder.org/badge_logo.svg)](http://beta.mybinder.org/v2/gh/seedpcseed/R-Learning/master?urlpath=rstudio)
-.. image:: https://mybinder.org/badge_logo.svg
