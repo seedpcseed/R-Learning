@@ -1,5 +1,16 @@
 # Lesson 3: reshaping data 
 
+# From Hadley Wichkam's "Reshaping data with the reshape package"
+# 
+# Data often has multiple levels of grouping (nested treatments, split plot designs, or 
+# repeated measurements) and typically requires investigation at multiple levels. For 
+# example, from a long term clinical study we may be interested in investigating 
+# relationships over time, or between times or patients or treatments. 
+# Performing these investigation s fluently requires the data to be reshaped
+# in different ways, but most software packages make it difficult 
+# to generalise these tasks and code
+# needs to be written for each specific case.
+
 # First we want to get some data
 # 
 
@@ -55,3 +66,52 @@ mtcars.cars %>% melt(id.vars="Cars", measure.vars=c("mpg", "gear"))
 
 mtcars.cars %>% melt(id.vars="Cars", measure.vars=c("mpg", "gear")) %>%
   arrange(Cars)
+
+# why go wide to long?  take a plot example
+# if we want to plot a simple X by y we might be able to 
+# use our only slightly modified data frame mtcars.cars
+
+ggplot(mtcars.cars, aes(Cars, mpg)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+# but what if we want to look at a few factors by car type
+
+mpg.p<- ggplot(mtcars.cars, aes(Cars, mpg)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+gear.p<- ggplot(mtcars.cars, aes(Cars, gear)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+cowplot::plot_grid(mpg.p, gear.p, nrow=1)
+
+# Not the best visualization
+# lets go to our 'melted' version
+
+ggplot(mtcars_melt, aes(variable, value)) +
+  geom_point() +
+  facet_wrap(~Cars) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+# this helps but is busy AND the scales of the data are different
+
+ggplot(mtcars_melt, aes(variable, value)) +
+  geom_point() +
+  scale_y_log10()+
+  facet_wrap(~Cars) +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+# maybe we just want some of the data and to flip them around
+
+mtcars_melt %>% 
+  filter(variable %in% c("mpg", "gear")) %>%
+  ggplot(aes(Cars, value)) +
+    geom_point() +
+    facet_wrap(~variable, scales = "free_y") +
+    theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
+
+# cast the melted data
+# cast(data, formula, function)
+
