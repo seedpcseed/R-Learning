@@ -40,4 +40,8 @@ Here we will go very slow and learn about the R Studio environment.
 - Look at factors
 - Examine functions
 
+## Launch it on Binder:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/seedpcseed/R-Learning/master)
 
+.. image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/seedpcseed/R-Learning/master
