@@ -28,9 +28,9 @@ class(df) # As expected the new variable takes on the class of the data assigned
 
 # look at the dimensions of the dataframe
 
-nrows(df)
+nrow(df)
 
-ncols(df)
+ncol(df)
 
 # There is a way to get the dimensions in one command
 
@@ -46,10 +46,28 @@ rownames(df)
 # There are many ways in R to do this
 
 # Here is a classic way if you know the columns and rows you want by numeric positions
+# Say we want to make a new dataframe that only has the 'vs' column
+# 
 
+df[, 8] #vs is column 8; here we are defining parts of df we want ---> df[rows,columns]
 
-# Here is a way using the names of columns you want
+# or
 
+df[, 'vs']
+
+# what if you want 'vs', 'am', 'wt' ?
+
+df[ ,c(8,9,6)] # very clunky
+
+df[, c('vs', 'am', 'wt')] #slightly better
+
+# We can also specify rows we want
+
+df[c(1,5,8),] # note that leaving NO condition in the place of columns after the comma means we want ALL the columns
+
+#or we can get chunks
+
+df[1:5, 1:3] # this states to subset rows 1 to 5 and columns 1 to 3
 
 # These ways are OK but there are newer methods that are easier to read
 # and make for a little more throughput
@@ -73,7 +91,23 @@ library(tidyverse)
 df %>% View()
 
 # this is taking our dataframe and sending it to View()
+# Sort of a silly example because we can just type
 
+View(df) #this gives us the same thing
+
+# but want after selecting columns in df like we did before
+
+df %>% select(vs, am, wt) # this is saying to start with df and select  the columns as named. Note the column names are not enclosed
+
+# to select rows is a little different
+
+df %>% slice(5) # this gives row 5
+
+df %>% slice(1:5) #this gives rows 1:5
+
+df %>% slice_head(n=5) # take 5 from the top
+
+df %>% slice_tail(n=3) #take 3 from the bottom
 
 
 
