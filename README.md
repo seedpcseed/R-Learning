@@ -28,8 +28,23 @@ Here we will go very slow and learn about the R Studio environment.
 
 - Review Lesson 1 key points
 - Look at Lesson 1 in markdown language
-- Explore data.frames and matricies
-- Talk about factors
+- Explore data.frames 
 - Subset and filter data
-- Take a first look at functions
+- Examine piping
+- Perform basic data frame summarization
 
+### Lesson 3
+
+- Reshape data frames
+
+### Lesson 4
+
+- Plotting data
+
+### Lesson 5 (to come)
+
+- Examine factors
+- Look at functions
+
+## Launch it on Binder:
+[![Binder](https://mybinder.org/badge_logo.svg)](http://beta.mybinder.org/v2/gh/seedpcseed/R-Learning/master?urlpath=rstudio)
