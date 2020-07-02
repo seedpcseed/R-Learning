@@ -12,7 +12,8 @@ midwest_states<- c("Illinois", "Indiana",
                    "South Dakota", "Wisconsin")
 
 read.csv("Data/us_covid.csv") %>%
-  filter(date > "2020-04-01" & date < "2020-04-31" & state %in% midwest_states) %>%
+  filter(date >= "2020-04-01" & date <= "2020-04-31" & state %in% midwest_states) %>%
+  mutate(date=as.Date(date)) %>%
   select(-fips) %>%
   pivot_longer(cols = c("cases", "deaths"), names_to= c("type")) %>%
   dplyr::group_by(state, type) %>%
