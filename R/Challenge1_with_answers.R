@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CHALLENGE: Plot the COVID-19 cases and deaths by   
 # 
 # You want to get public data about COVID-19 
@@ -11,6 +12,10 @@
 
 # library loading 
 
+=======
+# CHALLENGE: Plot the COVID-19 cases and deaths by
+#
+>>>>>>> bb980175181ebb548ebe6a2dda7f5d10b97036c9
 library(tidyverse)
 library(tibbletime)
 library (ggplot2)
@@ -20,14 +25,19 @@ library(directlabels)
 
 curl::curl_download("https://covid19-lake.s3.us-east-2.amazonaws.com/enigma-nytimes-data-in-usa/csv/us_states/us_states.csv", "Data/us_covid.csv")
 
+<<<<<<< HEAD
 
 # define the midwestern states
 
 midwest_states<- c("Illinois", "Indiana", 
                    "Iowa", "Kansas", 
+=======
+midwest_states<- c("Illinois", "Indiana",
+                   "Iowa", "Kansas",
+>>>>>>> bb980175181ebb548ebe6a2dda7f5d10b97036c9
                    "Michigan", "Minnesota",
-                   "Missouri", "Nebraska", 
-                   "North Dakota", "Ohio", 
+                   "Missouri", "Nebraska",
+                   "North Dakota", "Ohio",
                    "South Dakota", "Wisconsin")
 
 # read the data, filter, and plot
@@ -41,6 +51,7 @@ read_csv("Data/us_covid.csv") %>%
            date<=as.Date("2020-04-30") & 
            state %in% midwest_states) %>%
   select(-fips) %>%
+<<<<<<< HEAD
   pivot_longer(cols = c("cases", "deaths"), names_to= c("type")) %>%
   dplyr::group_by(state) %>%
   ggplot(aes(date, value, group=state))+
@@ -54,3 +65,15 @@ read_csv("Data/us_covid.csv") %>%
     ylab("Count")
 
 ggsave("covid19.april.midwest.png")
+=======
+  pivot_longer(cols = c("cases", "deaths"), names_to= c("type"))
+
+library(ggthemes)
+ggplot(df, aes(date, value, group=state))+
+    geom_line()+
+    geom_point(aes(shape=type, color=state), alpha=0.5) +
+    scale_color_hue() +
+    facet_wrap(~type, scales="free_y")+
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 90, hjust=1, vjust=0.5))
+>>>>>>> bb980175181ebb548ebe6a2dda7f5d10b97036c9
